@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="帝國陸軍 記錄本體 — 皇紀二千五百九十六年。部隊・衞戍地・戰歷・兵器・編制ノ臺帳ヲ手書キニテ收載ス。">
+  <title>帝國陸軍 記錄本體 — 質實剛健</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ━━━ 題字 ━━━ -->
+<header class="masthead">
+  <div class="hoshi">★ ★ ★</div>
+  <h1 class="dai">帝國陸軍</h1>
+  <div class="fuku">記 錄 本 體</div>
+  <div class="hakko">皇紀二千五百九十六年 ・ 陸軍省 發行</div>
+</header>
+
+<!-- ━━━ 目次 ━━━ -->
+<nav class="mokuji">
+  <a href="index.html" class="ima">總覽</a>
+  <a href="butai.html">部隊</a>
+  <a href="eiju.html">衞戍地</a>
+  <a href="senreki.html">戰歷</a>
+  <a href="heiki.html">兵器</a>
+  <a href="hensei.html">編制</a>
+  <a href="soshiki.html">組織</a>
+  <a href="kaikyu.html">階級</a>
+  <a href="ryugen.html">流言</a>
+</nav>
+
+<!-- ━━━ 電網演出係（電光掲示・奏樂裝置） ━━━ -->
+<div class="densou"><marquee scrollamount="4">★ 皇紀二五九六年 ・ 帝國陸軍記錄本體ハ全頁手書キデアリマス ★ 憲兵隊檢閲濟 ★ 陸軍記念日ハ三月十日デアリマス ★ 相互連絡（リンク）歡迎、無斷連絡ハ憲兵ニ屆出ノコト ★</marquee></div>
+
+<div class="midi-sochi">
+  <div class="daimei">♪ 奏樂裝置 — battoutai.mid（風）</div>
+  陸軍分列行進曲「拔刀隊」（ルルー 作曲・明治十八年）
+  <div>
+    <button id="battoutai-sousou" type="button" data-todokede="陸軍省經理局許可第一號">▶ 奏樂</button>
+    <button id="battoutai-teishi" type="button">■ 止メ</button>
+  </div>
+  <div class="obi"></div>
+  <div style="font-size:0.72rem; margin-top:0.3rem;">※ 本裝置ハ MIDI ニ非ズ、電網閲覽機ガ直接發音スル新式デアリマスガ、見タ目ハ舊式デアリマス</div>
+</div>
+
+<main>
+
+  <!-- ━━━ 告諭 ━━━ -->
+  <section id="kokuyu">
+    <h2>告 諭</h2>
+    <div class="h2-shita">陸軍省告諭 第一號</div>
+    <div class="kakomi">
+      <p>
+        帝國陸軍ハ茲ニ記錄本體（電網頁）ヲ開設スルモノデアリマス。
+        海軍ガ艦艇・海戰ノ記錄ヲ電網ニ公開シ、剩ヘ喫茶店ノ頁マデ設ケタル趣ニ付、
+        國民ノ皆樣ガ陸軍ノ部隊・戰歷ニ疎クナルコトヲ憂ヒ、陸軍モ亦臺帳ヲ公開スル次第デアリマス。
+      </p>
+      <p>
+        本頁ハ全頁一字一句手書キデアリマス。
+        他ニモ頁ノ拵ヘ方ガアルトハ海軍ヨリ聞キマシタガ、何ノコトヤラ判リマセン。
+        書ケバ其ノ通リニ出ル。質實剛健、以上デアリマス。
+      </p>
+      <p class="musubi">陸軍大臣</p>
+    </div>
+  </section>
+
+  <!-- ━━━ 頁案内 ━━━ -->
+  <section id="annai">
+    <h2>臺 帳 案 内</h2>
+    <div class="h2-shita">各臺帳ヘノ入口</div>
+    <ul class="fuda-annai">
+      <li><a href="butai.html"><span class="dai">部 隊</span><div class="chu">十七箇師團・隷下聯隊・外地ノ軍・武勳錄</div></a></li>
+      <li><a href="eiju.html"><span class="dai">衞戍地</span><div class="chu">師管・兵營施設・演習場・要塞十一箇所</div></a></li>
+      <li><a href="senreki.html"><span class="dai">戰 歷</span><div class="chu">日清・北清・日露以來ノ陸戰 竝ニ 出所不明ノ戰歷</div></a></li>
+      <li><a href="heiki.html"><span class="dai">兵 器</span><div class="chu">銃砲・戰車・航空機・軍馬・風説ノ兵器</div></a></li>
+      <li><a href="hensei.html"><span class="dai">編 制</span><div class="chu">統帥系統・軍旗・動員ノ仕組</div></a></li>
+      <li><a href="soshiki.html"><span class="dai">組 織</span><div class="chu">官衙・工廠・學校・外郭團體</div></a></li>
+      <li><a href="kaikyu.html"><span class="dai">階 級</span><div class="chu">階級・相當官・兵科定色</div></a></li>
+      <li><a href="ryugen.html"><span class="dai">流 言</span><div class="chu">憲兵隊檢束ノ流言蜚語綴（信ズル者ハ處罰ス）</div></a></li>
+    </ul>
+  </section>
+
+  <!-- ━━━ 兵力概數 ━━━ -->
+  <section id="heiryoku">
+    <h2>兵 力 概 數</h2>
+    <div class="h2-shita">皇紀二五九六年現在</div>
+    <table>
+      <thead>
+        <tr><th>項目</th><th>數</th><th>摘要</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>常設師團</td><td>十七</td><td>近衞以下。戰時ハ動員ニ依リ膨張ス</td></tr>
+        <tr><td>常備兵力</td><td>約二十三萬</td><td>現役兵。豫備・後備ヲ加フレバ二百萬</td></tr>
+        <tr><td>歩兵聯隊</td><td>六十八</td><td>各聯隊軍旗ヲ奉ズ</td></tr>
+        <tr><td>要塞</td><td>十一</td><td>沿岸防備</td></tr>
+        <tr><td>飛行聯隊</td><td>八</td><td>陸軍航空</td></tr>
+        <tr><td>軍馬</td><td>約五萬</td><td>兵器ニ非ズ戰友ナリ</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ━━━ 沿革 ━━━ -->
+  <section id="enkaku">
+    <h2>沿 革</h2>
+    <div class="h2-shita">建軍以來ノ大要</div>
+    <p>
+      年號ハ皇紀ナリ。海軍ノ頁ハ「1905年」ナドト記セド、何ヲ數ヘタル數字カ、目下問合セ中（返事未着）。
+    </p>
+    <ul class="nenpyo">
+      <li><span class="koki-toshi">皇紀二五三一年（明治四年）</span>御親兵ヲ設置。建軍ノ礎</li>
+      <li><span class="koki-toshi">皇紀二五三三年（明治六年）</span>徴兵令發布。國民皆兵ノ制成ル</li>
+      <li><span class="koki-toshi">皇紀二五四二年（明治十五年）</span>軍人勅諭ヲ賜フ。忠節・禮儀・武勇・信義・質素ノ五箇條</li>
+      <li><span class="koki-toshi">皇紀二五四八年（明治二十一年）</span>鎭臺ヲ改メ師團ヲ置ク</li>
+      <li><span class="koki-toshi">皇紀二五五四年（明治二十七年）</span>日清戰役。平壤・旅順・威海衞ニ大捷</li>
+      <li><span class="koki-toshi">皇紀二五六五年（明治三十八年）</span>日露戰役。三月十日奉天大會戰ニ大勝、此ノ日ヲ陸軍記念日ト定ム</li>
+      <li><span class="koki-toshi">皇紀二五七四年（大正三年）</span>青島攻略。攻城重砲ノ威力顯著</li>
+      <li><span class="koki-toshi">皇紀二五七九年（大正八年）</span>航空部ヲ設ク。空モ亦陸軍ノ戰場</li>
+      <li><span class="koki-toshi">皇紀二五八五年（大正十四年）</span>軍縮ニ依リ四箇師團廢止。遺憾千萬</li>
+      <li><span class="koki-toshi">皇紀二五九六年（昭和十一年）</span>本記錄本體ヲ開設（不本意ナガラ）</li>
+    </ul>
+  </section>
+
+  <!-- ━━━ 照會所 ━━━ -->
+  <section id="shokai">
+    <h2>臺帳謄本 照會所</h2>
+    <div class="h2-shita">機械可讀ニ非ズ、電文（平文）ニテ交付</div>
+    <p>
+      海軍ハ「JSON」ナル機械可讀ノ帳簿ヲ交付スル由ナレド、人ノ讀メヌ帳簿ニ用ナシ。
+      陸軍ノ謄本ハ電文（平文）ナリ。紙ニ刷リテ保管サレタシ。
+    </p>
+    <table>
+      <thead>
+        <tr><th>臺帳</th><th>謄本（電文）</th><th>摘要</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>師團臺帳</td><td><a href="data/shidan.txt">data/shidan.txt</a></td><td>常設十七箇師團</td></tr>
+        <tr><td>兵器臺帳</td><td><a href="data/heiki.txt">data/heiki.txt</a></td><td>制式兵器拔萃</td></tr>
+        <tr><td>戰歷臺帳</td><td><a href="data/senreki.txt">data/senreki.txt</a></td><td>主要陸戰大要</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ━━━ 管理體制 ━━━ -->
+  <section id="kanri">
+    <h2>管 理 體 制</h2>
+    <div class="h2-shita">傳統ノ工程、之ヲ守ル</div>
+    <p>
+      海軍ハ六機關（軍務局・第三部・特警隊・軍令部・工廠・副官部）ヲ設クル由。
+      頁一枚ニ六機關、何ヲシテ居ルノカ判ラズ。陸軍ノ工程ハ左ノ通リ。昔カラ斯ウシテ居ル。
+    </p>
+    <table>
+      <thead>
+        <tr><th>工程</th><th>海軍（新式）</th><th>陸軍（傳統）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>起草</td><td>型式言語（何トカ・スクリプト）ニテ記述ノ由</td><td>和紙ニ毛筆</td></tr>
+        <tr><td>審査</td><td>四機關ノ分業</td><td>憲兵ガ目視、曹長ガ音讀。二人デ足ル</td></tr>
+        <tr><td>組立</td><td>工廠ノ職工ガ工程表ニテ組立ノ由</td><td>不要。書イタ通リニ出ル</td></tr>
+        <tr><td>公示</td><td>副官部ガ海軍公報ニ掛載ノ由</td><td><strong>掛載セズ。枝（master）ヨリ直接配信</strong></td></tr>
+      </tbody>
+    </table>
+    <p>同ジ手作業ナラバ、道具ト機關ハ少ナキ方ガ強シ。</p>
+  </section>
+
+
+  <!-- ━━━ 偕行社 ━━━ -->
+  <section id="kaikosha">
+    <h2>偕 行 社</h2>
+    <div class="h2-shita">將校團體 — 明治十年創立</div>
+    <p>
+      陸軍將校ノ親睦・學術研鑽・共濟ノ團體トシテ<strong>偕行社</strong>アリ。
+      明治十年創立、本社ハ東京九段、各衞戍地ニ分社ヲ置ク。
+      會誌「偕行社記事」ノ刊行、附屬小學校ノ運營、遺族扶助等ノ事業ヲ營ム。
+    </p>
+    <table>
+      <tbody>
+        <tr><td style="width:8em;"><strong>公式頁</strong></td><td><a href="https://imperial-army.github.io/kaikosha/">imperial-army.github.io/kaikosha</a></td></tr>
+        <tr><td><strong>社員資格</strong></td><td>陸軍將校及ビ將校相當官ニ限ル</td></tr>
+        <tr><td><strong>備考</strong></td><td>頁ハ社員向ケナリ。一般ノ閲覽ヲ拒マヌガ歡迎モセヌ由</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ━━━ 海軍トノ關係 ━━━ -->
+  <section id="kaigun">
+    <h2>海軍トノ關係</h2>
+    <div class="h2-shita">對等ニシテ從屬セズ</div>
+    <div class="kakomi">
+      <p>
+        陸海兩軍ハ對等ノ軍種ニシテ、何レモ他方ニ從屬セズ。統帥權ハ共ニ天皇陛下ニ屬ス。
+        本頁ハ彼ノ「記錄本體（kaigun）」ニ對スル陸軍ノ記錄本體ナリ。
+        時局ニ依リテハ已ムヲ得ズ協力スルコトアリ——威海衞・青島、實例ハ既ニ在リ。
+        協力ハ協力、對抗心ハ對抗心。之ガ大人ノ關係ナリ。
+      </p>
+    </div>
+    <table>
+      <thead>
+        <tr><th>先方</th><th>頁</th><th>陸軍所見</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>海軍 記錄本體</td>
+          <td><a href="https://imperial-navy.github.io/kaigun/">imperial-navy.github.io/kaigun</a></td>
+          <td>艦ノ名鑑ハ立派。頁ノ仕組ミハ横文字ノ新式機關塗レ</td>
+        </tr>
+        <tr>
+          <td>水交社（海軍ノ社交場）</td>
+          <td><a href="https://imperial-navy.github.io/suikosha/">imperial-navy.github.io/suikosha</a></td>
+          <td>喫茶店ノ頁マデ作ル餘裕、羨マシクナドナシ。三笠アイスハ……一度食ベタ。美味カツタ</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<!-- ━━━ 奧付 ━━━ -->
+<footer>
+  <div class="gou">帝國陸軍</div>
+  <div>
+    皇紀二千五百九十六年（昭和十一年） ・ 陸軍省 發行<br>
+    全頁手書キ ・ 枝ヨリ直接配信<br>
+    <a href="https://github.com/imperial-army/rikugun">檔案置場（GitHub）</a>
+  </div>
+  <div style="margin-top:1rem;">
+    貴殿ハ <span class="counter" id="raihousha">0004907</span> 人目ノ來訪者デアリマス
+  </div>
+  <div style="margin-top:0.6rem; font-size:0.8rem;">
+    <span class="shunsetsu">★</span> 一部頁面ハ普請中デアリマス <span class="shunsetsu">★</span>
+  </div>
+  <div style="margin-top:0.4rem; font-size:0.75rem; color:#6d6355;">
+    本頁ハ 800×600・十六色 ノ電網閲覽機ニテ閲覽サレルコトヲ推奬シマス
+  </div>
+  <div class="kotowari">
+    Disclaimer: 本頁ハ風刺的創作物（satirical / educational project）ニシテ、歷史的題材ヲ用ヰタ技術實驗ナリ。
+    特定ノ思想・政治體制・軍國主義ヲ推進・支持スルモノニ非ズ。掲載ノ行事・記述ハ全テ架空ナリ。
+  </div>
+</footer>
+
+
+<script data-todokede="陸軍省經理局許可第一號">
+/* 奏樂裝置 — 陸軍分列行進曲「拔刀隊」（ルルー 明治十八年）
+   本 script ハ陸軍省經理局許可第一號トシテ憲兵隊ニ屆出濟デアリマス。
+   MIDI ニ見エルガ電網閲覽機ノ發音機關（Web Audio）ヲ用ヰル。
+   譜ハ軍樂隊ノ原譜ニ據ル（明治十八年 ルルー原曲。短調ノ歌部ヨリ長調ノ「進メヤ進メ」マデ）。 */
+(function () {
+  var NE = { A3: 220.0, B3: 246.94, C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, 'F#4': 369.99, G4: 392.0, 'G#4': 415.3, A4: 440.0, B4: 493.88, C5: 523.25, 'C#5': 554.37, D5: 587.33, E5: 659.26 };
+  var HAKU = 0.52; // 行進ノ歩調
+  var GAKUFU = [
+    // 我ハ官軍我ガ敵ハ 天地容レザル朝敵ゾ
+    ['A3',0.5],['E4',0.5],['E4',1],['E4',1],['E4',1],
+    ['F4',0.5],['F4',0.5],['D4',0.5],['F4',0.5],['E4',2],
+    ['D4',0.5],['B3',1],['D4',0.5],['E4',0.5],['E4',0.5],['E4',0.5],
+    ['F4',0.5],['B3',1],['C4',0.75],['B3',0.25],['A3',2],
+    // 敵ノ大將タル者ハ 古今無雙ノ英雄デ
+    ['A3',0.5],['E4',0.5],['E4',1],['E4',1],['E4',1],
+    ['F4',0.5],['F4',0.5],['D4',0.5],['F4',0.5],['E4',1.5],['R',0.5],
+    ['D4',0.5],['B3',1],['D4',0.5],['E4',0.5],['E4',0.5],['E4',0.5],
+    ['F4',0.5],['B3',1],['C4',0.75],['B3',0.25],['A3',1],['R',1],
+    // 之ニ從フ兵ハ共ニ 慓悍決死ノ士ナレバ
+    ['A4',0.5],['A4',1],['B4',0.5],['C5',0.5],['C5',0.5],['C5',1],
+    ['C5',0.5],['B4',0.5],['A4',0.5],['B4',0.5],['E4',1.5],['R',0.5],
+    ['D4',1],['E4',0.5],['F4',0.5],['G4',0.75],['G4',0.25],['G4',0.5],['G4',0.5],
+    ['D4',0.75],['D4',0.25],['E4',0.5],['D4',0.5],['C4',0.5],['R',1.5],
+    // 鬼神ニ恥ヂヌ勇アルモ 天ノ許サヌ叛逆ヲ
+    ['A4',0.5],['A4',1],['B4',0.5],['C5',0.5],['C5',0.5],['C5',1],
+    ['C5',0.5],['B4',0.5],['A4',0.5],['B4',0.5],['E4',1.5],['R',0.5],
+    ['D4',1],['E4',0.5],['F4',0.5],['G4',0.75],['G4',0.25],['G4',0.5],['G4',0.5],
+    ['D4',0.75],['D4',0.25],['E4',0.5],['D4',0.5],['C4',0.5],['R',1.5],
+    // 起シシ者ハ昔ヨリ 榮エシ例アラザルゾ
+    ['C5',0.5],['C5',0.5],['B4',0.5],['A4',0.5],['G4',0.75],['G4',0.25],['G4',1],
+    ['A4',0.5],['A4',0.5],['G4',0.5],['F4',0.5],['E4',1.5],['R',0.5],
+    ['A3',0.5],['B3',0.5],['C4',0.5],['D4',0.5],['E4',0.5],['E4',0.5],['E4',1],
+    ['A4',0.5],['A4',0.5],['G#4',0.5],['A4',0.5],['B4',1.5],['R',0.5],
+    // 敵ノ亡ブルソレマデハ 進メヤ進メ諸共ニ
+    ['C#5',1],['B4',0.75],['A4',0.25],['A4',0.5],['A4',0.5],['A4',0.5],['A4',0.5],
+    ['F#4',0.5],['F#4',0.5],['A4',0.5],['A4',0.5],['C#5',1.5],['R',0.5],
+    ['A4',0.5],['A4',0.5],['G#4',0.5],['A4',0.5],['F#4',1],['G#4',0.5],['A4',0.5],
+    ['B4',0.75],['B4',0.25],['B4',0.5],['B4',0.5],['B4',1.5],['R',0.5],
+    // 玉散ル劍拔キ連レテ 死ヌル覺悟デ進ムベシ
+    ['C#5',0.5],['C#5',0.5],['B4',0.5],['A4',0.5],['A4',0.5],['A4',0.5],['A4',1],
+    ['F#4',0.5],['F#4',0.5],['D5',0.5],['D5',0.5],['C#5',1.5],['R',0.5],
+    ['B4',1],['C#5',0.5],['D5',0.5],['E5',0.5],['C#5',0.5],['A4',0.5],['E5',0.5],
+    ['C#5',1],['B4',0.75],['C#5',0.25],['A4',2]
+  ];
+  var soukyoku = null, owariId = null;
+  var okuri = document.getElementById('battoutai-sousou');
+  var tome = document.getElementById('battoutai-teishi');
+  if (!okuri || !tome) return;
+
+  function hassei(toki, shuuha, nagasa) {
+    [1, 2].forEach(function (baisu, i) {
+      var gen = soukyoku.createOscillator();
+      var otoryo = soukyoku.createGain();
+      gen.type = i === 0 ? 'square' : 'sine';
+      gen.frequency.value = shuuha * baisu;
+      var mine = i === 0 ? 0.14 : 0.05;
+      var jitsu = nagasa * 0.88;
+      otoryo.gain.setValueAtTime(0.0001, toki);
+      otoryo.gain.linearRampToValueAtTime(mine, toki + 0.03);
+      otoryo.gain.setValueAtTime(mine, toki + Math.max(0.04, jitsu - 0.08));
+      otoryo.gain.linearRampToValueAtTime(0.0001, toki + jitsu);
+      gen.connect(otoryo).connect(soukyoku.destination);
+      gen.start(toki);
+      gen.stop(toki + jitsu + 0.05);
+    });
+  }
+
+  function teishi() {
+    if (owariId) { clearTimeout(owariId); owariId = null; }
+    if (soukyoku) { soukyoku.close(); soukyoku = null; }
+    okuri.classList.remove('sousou');
+  }
+
+  okuri.addEventListener('click', function () {
+    if (soukyoku) return;
+    soukyoku = new (window.AudioContext || window.webkitAudioContext)();
+    var toki = soukyoku.currentTime + 0.12;
+    GAKUFU.forEach(function (fu) {
+      var nagasa = fu[1] * HAKU;
+      if (fu[0] !== 'R') hassei(toki, NE[fu[0]], nagasa);
+      toki += nagasa;
+    });
+    okuri.classList.add('sousou');
+    owariId = setTimeout(teishi, (toki - soukyoku.currentTime + 0.4) * 1000);
+  });
+  tome.addEventListener('click', teishi);
+
+  // 來訪者計數器（日附ヨリ算出。亂數機關ハ用ヰヌ）
+  var keisuki = document.getElementById('raihousha');
+  if (keisuki) {
+    var kijun = new Date('2026-03-13').getTime();
+    var hikazu = Math.max(0, Math.floor((Date.now() - kijun) / 86400000));
+    var kazu = 4907 + hikazu * 3;
+    keisuki.textContent = String(kazu).padStart(7, '0');
+  }
+})();
+</script>
+
+</body>
+</html>

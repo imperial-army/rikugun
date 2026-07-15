@@ -1,0 +1,197 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║                                                              ║
+# ║  陸軍省憲兵司令部                                            ║
+# ║  Kenpeitai Page Inspection — 憲秘第〇〇二号                  ║
+# ║                                                              ║
+# ║  根據法令:                                                   ║
+# ║    憲兵令（明治三十一年勅令第三百三十七号）                   ║
+# ║    陸軍刑法（明治四十一年法律第四十六号）                     ║
+# ║    大日本帝國憲法 第十一條（統帥權ノ獨立）                   ║
+# ║                                                              ║
+# ║  管轄: 陸軍大臣 — 陸軍省憲兵司令部（@imperial-army 直屬）    ║
+# ║  任務: 陸軍記錄本體（電網頁）ノ檢閲・軍規維持・防諜         ║
+# ║                                                              ║
+# ║  ※ 本 workflow ハ陸軍省ノ專管事項ナリ。                      ║
+# ║    海軍（@Imperial-navy）トハ管轄ヲ峻別ス。                  ║
+# ║    海軍ノ符牒規律審査ハ tokkeitai.yaml ニテ獨自ニ實施。      ║
+# ║    陸海軍ノ合同ハ在リ得ス。統帥系統ハ各々獨立ナリ。         ║
+# ║                                                              ║
+# ║  ※ 本書ハ機關ニ非ズ、憲兵ノ勤務要領ヲ書キ留メタモノナリ。   ║
+# ║    憲兵ハ目視ニテ檢閲ス。昔カラ斯ウシテ居ル。               ║
+# ║                                                              ║
+# ║  ⚠ GitHub ToS 準據事項:                                     ║
+# ║  本 workflow ハ GitHub ToS Section F ニ基ヅク管理行爲ナリ。  ║
+# ║  本 Repository ハ風刺的創作物（satirical project）ナリ。     ║
+# ║                                                              ║
+# ╚══════════════════════════════════════════════════════════════╝
+#
+# @kenpeitai-bot
+#
+# 憲兵隊ハ明治十四年（1881）ニ創設サレタル陸軍ノ秩序維持機關ナリ。
+# 陸軍大臣ノ管轄下ニ在リ、@imperial-army 所屬。
+# 本 repository ニ於テハ電網頁（記錄本體）ノ檢閲ヲ擔當ス。
+#
+# 陸軍ノ頁ハ手書キヲ旨トス。新式ノ組立機關・型式言語・
+# 頁內ノ script 札ノ持込ミハ悉ク軍規違反トシテ處斷サルベシ。
+# 意味ノ通ラヌ片假名語ハ暗號ノ疑ヒアリ、防諜上之ヲ檢束ス。
+#
+# ※ 海軍（tokkeitai.yaml）ハ通信保安・防諜・符牒紀律ヲ管轄ス。
+#   陸海軍ハ各々獨立ノ統帥系統ヲ有シ、合同審査ナド在リ得ス。
+
+name: 🪖 陸軍憲兵隊電網頁檢閲
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # 🪖 電網頁檢閲（軍規維持・防諜・不敬取締）
+  #    管轄: 陸軍省憲兵司令部（@imperial-army 直屬）
+  #    審査: 新式機關持込 / 暗號嫌疑ノ片假名語 / 不敬命名
+  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  denmo-kenetsu:
+    name: 🪖 電網頁檢閲
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.pull_request.author_association != 'OWNER'
+    steps:
+      - name: 📥 御眞影ノチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 🪖 陸軍憲兵隊電網頁檢閲
+        run: |
+          echo "┌──────────────────────────────────────────────────────┐"
+          echo "│  憲秘                              陸軍省憲兵司令部  │"
+          echo "│                                                      │"
+          echo "│              電 網 頁 檢 閲 報 告 書                  │"
+          echo "│                                                      │"
+          echo "│  事件番號: ${GITHUB_SHA:0:8}                         │"
+          echo "│  被檢閲者: ${{ github.actor }}                       │"
+          echo "│  擔當:     陸軍憲兵隊                                 │"
+          echo "│  適用法令: 憲兵令 / 陸軍刑法                         │"
+          echo "└──────────────────────────────────────────────────────┘"
+          echo ""
+
+          VIOLATIONS=0
+          ADDED_FILES=$(git diff HEAD~1 --name-only 2>/dev/null || echo "")
+          DIFF_CONTENT=$(git diff HEAD~1 -- '*.html' '*.md' '*.txt' 2>/dev/null || echo "")
+          # 追加行ノミヲ審査対象トス（削除行・context 行ヘノ誤検出ヲ防グ — 憲兵司令部規程）
+          ADDED_LINES=$(echo "$DIFF_CONTENT" | grep -E '^\+' | grep -v '^\+\+\+' || echo "")
+
+          # ━━━ 軍紀第一: 新式機關・組立道具ノ持込 ━━━
+          echo "【軍紀第一】新式機關・組立道具ノ持込ミ檢閲..."
+          if echo "$ADDED_FILES" | grep -qE 'package\.json|node_modules/|\.ts$|\.jsx?$|tailwind|webpack'; then
+            echo "  ⚠ 違反！ 新式機關ノ持込ミヲ現認。"
+            echo "    陸軍ノ頁ハ手書キヲ旨トス。道具ハ筆ト硯ト鍵盤デ足ル。"
+            echo "    危險度: 甲"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。頁ハ手書キノママ。"
+          fi
+
+          echo ""
+
+          # ━━━ 軍紀第二: AI向ケ指南書（CLAUDE.md）ノ設置 ━━━
+          echo "【軍紀第二】AI向ケ指南書ノ檢閲..."
+          if echo "$ADDED_FILES" | grep -qi 'CLAUDE\.md'; then
+            echo "  ⚠ 違反！ CLAUDE.md ノ設置ヲ現認。"
+            echo "    軍規ハ README ニ記セバ足ル。指南書ノ類ハ無用ナリ。"
+            echo "    危險度: 乙"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。指南書ノ類ハ檢知サレズ。"
+          fi
+
+          echo ""
+
+          # ━━━ 軍紀第三: 頁內 script 札ノ混入 ━━━
+          echo "【軍紀第三】script 札（頁ヲ勝手ニ動カス仕掛ケ）ノ檢閲..."
+          echo "  ※ 屆出濟（data-todokede 附）ノ奏樂裝置ハ此ノ限リニ非ズ。"
+          if git diff HEAD~1 -- '*.html' 2>/dev/null | grep -E '^\+' | grep -i '<script' | grep -qv 'data-todokede'; then
+            echo "  ⚠ 違反！ 屆出無キ script 札ノ混入ヲ現認。"
+            echo "    本頁ハ紙ノ如ク靜カデアルベシ。屆出ハ陸軍省經理局ヘ。"
+            echo "    危險度: 乙"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。屆出無キ script 札ハ檢知サレズ。"
+          fi
+
+          echo ""
+
+          # ━━━ 軍紀第四: 暗號嫌疑ノ片假名語（防諜） ━━━
+          echo "【軍紀第四】意味ノ通ラヌ片假名語（暗號嫌疑）ノ檢閲..."
+          ANGO=$(echo "$ADDED_LINES" | grep -cE 'ホームページ|ウェブサイト|システム|フレームワーク|コンテンツ|ユーザー|デザイン|アップデート|ダウンロード' || echo "0")
+          if [ "$ANGO" -gt 0 ]; then
+            echo "  ⚠ 嫌疑！ 意味ノ通ラヌ片假名語 ${ANGO} 件ヲ現認。"
+            echo "    國語辭典ニ見當タラヌ語ナリ。暗號文ノ疑ヒアリ、防諜上檢束ス。"
+            echo "    平文（國語）ニテ書キ直シ、再提出スベシ。"
+            echo "    危險度: 甲"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。暗號ノ疑ヒアル語ハ檢知サレズ。"
+          fi
+
+          echo ""
+
+          # ━━━ 軍紀第五: 紀年法ノ誤記 ━━━
+          echo "【軍紀第五】紀年法ノ檢閲..."
+          GOKI=$(echo "$ADDED_LINES" | grep -cE '(18|19)[0-9]{2}年' || echo "0")
+          if [ "$GOKI" -gt 0 ]; then
+            echo "  ⚠ 誤記！ 見慣レヌ四桁ノ年 ${GOKI} 件ヲ現認。"
+            echo "    年ノ數ヘ方ヲ誤ツテ居ル模樣ナリ。皇紀ニ訂正スベシ。"
+            echo "    （海軍ノ頁ニモ同樣ノ誤記アリ。目下問ヒ合ハセ中ナリ）"
+            echo "    危險度: 乙"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。紀年法ハ皇紀ニテ統一サレテ在リ。"
+          fi
+
+          echo ""
+
+          # ━━━ 軍紀第六: 不敬命名（「天皇」單體表記） ━━━
+          echo "【軍紀第六】不敬表記ノ檢閲..."
+          if echo "$ADDED_LINES" | grep -qP '天皇(?!陛下)'; then
+            echo "  ⚠ 違反！ 「天皇」單體表記ヲ現認。"
+            echo "    必ズ「天皇陛下」又ハ「大元帥陛下」ト記スベシ。"
+            echo "    陸軍刑法第九十九條（上官侮辱）ヲ準用ス。"
+            echo "    危險度: 甲"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          else
+            echo "  異常ナシ。天皇陛下ヘノ敬意ハ保タレテ在リ。"
+          fi
+
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo ""
+            echo "【檢閲結果】 軍規違反 ${VIOLATIONS} 件ヲ現認。"
+            echo ""
+            echo "  ┌───────────────────────────────────────────┐"
+            echo "  │  罪狀:   軍規違反（${VIOLATIONS} 件）             │"
+            echo "  │  根據:   憲兵令 / 陸軍刑法               │"
+            echo "  │  處分:   CI 不通過                        │"
+            echo "  │  擔當:   @kenpeitai-bot                  │"
+            echo "  └───────────────────────────────────────────┘"
+            echo ""
+            echo "頁ヲ改メ、再度檢閲ニ附スベシ。"
+            echo "修正ノ上、陸軍省憲兵司令部ノ許可ヲ得テ再提出セヨ。"
+            exit 1
+          else
+            echo ""
+            echo "【檢閲結果】 異常ナシ。軍規ハ嚴正ニ保タレテ在リ。"
+            echo ""
+            echo "  ┌───────────────────────────────────────────┐"
+            echo "  │  檢閲結果: 合格                            │"
+            echo "  │  擔當:     @kenpeitai-bot                 │"
+            echo "  └───────────────────────────────────────────┘"
+            echo ""
+            echo "※ 憲兵ハ常ニ見テ居ル。合格ハ油斷ノ許可ニ非ズ。"
+          fi
